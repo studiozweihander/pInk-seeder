@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>pInk Seeder</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'JetBrains Mono', monospace;
+            background: #181818;
+            color: #ffffff;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        h1 {
+            text-align: center;
+            margin-bottom: 40px;
+            font-size: 2.5em;
+            font-weight: 300;
+            color: #e48fde;
+        }
+        
+        .section {
+            background: #242424;
+            border-radius: 16px;
+            padding: 30px;
+            margin-bottom: 30px;
+            border: 1px solid #333333;
+        }
+        
+        .section h2 {
+            color: #e48fde;
+            margin-bottom: 25px;
+            font-size: 1.5em;
+            font-weight: 500;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #333333;
+        }
+        
+        .full-width-section {
+            width: 100%;
+        }
+        
+        .template-section {
+            margin-bottom: 20px;
+        }
+        
+        .patterns-section {
+            background: #2a2a2a;
+            border: 1px solid #333333;
+            border-radius: 12px;
+            padding: 20px;
+        }
+        
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        label {
+            margin-bottom: 8px;
+            color: #e48fde;
+            font-weight: 500;
+            font-size: 0.9em;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        input, textarea, select {
+            padding: 12px 16px;
+            background: #333333;
+            border: 1px solid #444444;
+            border-radius: 8px;
+            color: #ffffff;
+            font-family: inherit;
+            font-size: 14px;
+            transition: all 0.3s ease;
+        }
+        
+        input:focus, textarea:focus {
+            outline: none;
+            border-color: #e48fde;
+            background: #3a3a3a;
+        }
+        
+        input::placeholder, textarea::placeholder {
+            color: #888888;
+        }
+        
+        .template-textarea {
+            min-height: 180px;
+            font-family: 'Monaco', 'Consolas', monospace;
+            font-size: 13px;
+            line-height: 1.4;
+        }
+        
+        button {
+            background: #e48fde;
+            color: #181818;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 500;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        button:hover {
+            background: #d67ccf;
+            transform: translateY(-1px);
+        }
+        
+        .btn-secondary {
+            background: #666666;
+            color: #ffffff;
+        }
+        
+        .btn-secondary:hover {
+            background: #777777;
+        }
+        
+        .patterns-info {
+            background: #2e2e2e;
+            border: 1px solid #333333;
+            border-radius: 8px;
+            padding: 15px;
+        }
+        
+        .patterns-info h3 {
+            color: #e48fde;
+            font-size: 1.1em;
+            margin-bottom: 10px;
+        }
+        
+        .patterns-info p {
+            margin: 5px 0;
+            font-size: 0.9em;
+            opacity: 0.9;
+        }
+        
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background: #2a2a2a;
+            border-radius: 12px;
+            overflow: hidden;
+        }
+        
+        .data-table th {
+            background: #e48fde;
+            color: #181818;
+            padding: 15px 12px;
+            text-align: left;
+            font-weight: 500;
+            text-transform: uppercase;
+            font-size: 0.85em;
+            letter-spacing: 0.5px;
+        }
+        
+        .data-table td {
+            padding: 12px;
+            border-bottom: 1px solid #333333;
+        }
+        
+        .data-table tbody tr:hover {
+            background: #2e2e2e;
+        }
+        
+        .data-table input, .data-table textarea {
+            background: #333333;
+            border: 1px solid #444444;
+            padding: 8px;
+            width: 100%;
+            color: #ffffff;
+            min-width: 0;
+            box-sizing: border-box;
+        }
+        
+        .data-table input:focus, .data-table textarea:focus {
+            border-color: #e48fde;
+        }
+        
+        .table-controls {
+            display: flex;
+            gap: 12px;
+            margin: 20px 0;
+            flex-wrap: wrap;
+        }
+        
+        .output {
+            background: #1e1e1e;
+            border: 1px solid #333333;
+            border-radius: 12px;
+            padding: 20px;
+            font-family: 'Monaco', 'Consolas', monospace;
+            font-size: 13px;
+            min-height: 300px;
+            white-space: pre-wrap;
+            overflow-x: auto;
+            color: #ffffff;
+            line-height: 1.5;
+        }
+        
+        .generate-controls {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .variable {
+            background: #e48fde;
+            color: #181818;
+            padding: 4px 8px;
+            border-radius: 6px;
+            font-weight: 500;
+            display: inline-block;
+            margin: 3px;
+            cursor: pointer;
+            font-size: 0.85em;
+            transition: all 0.3s ease;
+        }
+        
+        .variable:hover {
+            background: #d67ccf;
+            transform: scale(1.05);
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 10px;
+            }
+            
+            h1 {
+                font-size: 2em;
+            }
+            
+            .section {
+                padding: 20px;
+            }
+            
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>pInk Seeder</h1>
+        
+        <div class="section">
+            <h2>Configurações Padrões</h2>
+            
+            <div class="template-section full-width-section">
+                <div class="form-group">
+                    <label>Template Base:</label>
+                    <textarea id="template" class="template-textarea" placeholder="Digite seu template SQL aqui usando variáveis como {title}, {number}, etc.">INSERT INTO "Issue" (title, "issueNumber", year, size, series, genres, link, cover, synopsis, "comicId", "idiomId")
+VALUES ('{title}', {number}, {year}, '{size}', '{series}', ARRAY{genres}, '{link}', '{cover}', '{synopsis}', {comicId}, {idiomId});</textarea>
+                </div>
+            </div>
+            
+            <div class="patterns-section full-width-section">
+                <h3 style="color: #e48fde; margin-bottom: 15px;">Padrões Automáticos:</h3>
+                <div class="patterns-info">
+                    <p><strong>Título:</strong> {baseSeries} #{number}</p>
+                    <p><strong>Série:</strong> {baseSeries} ({startYear})</p>
+                    <p><strong>Cover:</strong> Auto-gerado baseado no número</p>
+                </div>
+                
+                <div style="margin-top: 15px;">
+                    <h3 style="color: #e48fde; margin-bottom: 10px;">Variáveis Disponíveis:</h3>
+                    <div class="variable" onclick="insertVariable('title')">{title}</div>
+                    <div class="variable" onclick="insertVariable('number')">{number}</div>
+                    <div class="variable" onclick="insertVariable('year')">{year}</div>
+                    <div class="variable" onclick="insertVariable('size')">{size}</div>
+                    <div class="variable" onclick="insertVariable('series')">{series}</div>
+                    <div class="variable" onclick="insertVariable('genres')">{genres}</div>
+                    <div class="variable" onclick="insertVariable('link')">{link}</div>
+                    <div class="variable" onclick="insertVariable('cover')">{cover}</div>
+                    <div class="variable" onclick="insertVariable('synopsis')">{synopsis}</div>
+                    <div class="variable" onclick="insertVariable('comicId')">{comicId}</div>
+                    <div class="variable" onclick="insertVariable('idiomId')">{idiomId}</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>Configurações Globais</h2>
+            <div class="form-grid">
+                <div class="form-group">
+                    <label>Série Base:</label>
+                    <input type="text" id="baseSeries" placeholder="Nome da Série">
+                </div>
+                <div class="form-group">
+                    <label>Ano Início:</label>
+                    <input type="number" id="startYear" placeholder="Ano de Lançamento">
+                </div>
+                <div class="form-group">
+                    <label>Comic ID:</label>
+                    <input type="number" id="comicId" value="5" placeholder="ID do comic">
+                </div>
+                <div class="form-group">
+                    <label>Idiom ID:</label>
+                    <input type="number" id="idiomId" value="1" placeholder="1 = Português Brasileiro, 2 = Inglês">
+                </div>
+                <div class="form-group">
+                    <label>Gêneros (formato array):</label>
+                    <input type="text" id="genres" placeholder="['Gênero1', 'Gênero2']">
+                </div>
+                <div class="form-group">
+                    <label>Base URL Link:</label>
+                    <input type="text" id="baseLink" placeholder="https://ranoz.gg/file/">
+                </div>
+                <div class="form-group">
+                    <label>Base URL Cover:</label>
+                    <input type="text" id="baseCover" placeholder="https://example.com/covers/">
+                </div>
+                <div class="form-group">
+                    <label>Padrão Cover:</label>
+                    <input type="text" id="coverPattern" value="the-walking-dead-{number:3}.webp">
+                </div>
+            </div>
+        </div>
+        
+        <div class="section">
+            <h2>Dados Únicos por Registro</h2>
+            
+            <div style="overflow-x: auto;">
+                <table class="data-table" id="dataTable">
+                    <thead>
+                        <tr>
+                            <th style="width: 80px;">Nº</th>
+                            <th style="width: 95px;">Ano</th>
+                            <th style="width: 120px;">Tamanho</th>
+                            <th style="width: 200px;">Link Code</th>
+                            <th>Sinopse</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tableBody">
+                    </tbody>
+                </table>
+            </div>
+            
+            <div class="table-controls">
+                <button onclick="addRow()">Adicionar Linha</button>
+                <button onclick="removeRow()" class="btn-secondary">Remover Última</button>
+                <button onclick="loadExample()">Carregar Exemplo</button>
+                <button onclick="clearTable()" class="btn-secondary">Limpar Tudo</button>
+            </div>
+        </div>
+        
+        <div class="section">
+            <h2>Resultado Gerado</h2>
+            <div class="generate-controls">
+                <button onclick="generateSQL()">Gerar SQL</button>
+                <button onclick="copyOutput()" class="btn-secondary">Copiar</button>
+                <button onclick="downloadSQL()" class="btn-secondary">Baixar</button>
+            </div>
+            <div class="output" id="output"></div>
+        </div>
+    </div>
+
+    <script>
+        function insertVariable(varName) {
+            const template = document.getElementById('template');
+            const cursorPos = template.selectionStart;
+            const textBefore = template.value.substring(0, cursorPos);
+            const textAfter = template.value.substring(template.selectionEnd);
+            template.value = textBefore + '{' + varName + '}' + textAfter;
+            template.focus();
+        }
+        
+        function addRow() {
+            const tbody = document.getElementById('tableBody');
+            const rowCount = tbody.rows.length + 1;
+            const row = tbody.insertRow();
+            
+            let yearValue = document.getElementById('startYear').value;
+            if (tbody.rows.length > 1) {
+                const previousRow = tbody.rows[tbody.rows.length - 2];
+                yearValue = previousRow.cells[1].querySelector('input').value;
+            }
+            
+            row.innerHTML = `
+                <td><input type="number" value="${rowCount}"></td>
+                <td><input type="number" value="${yearValue}"></td>
+                <td><input type="text" placeholder="3.98 MB"></td>
+                <td><input type="text" placeholder="https://ranoz.gg/file/C96p53di"></td>
+                <td><textarea rows="1" placeholder="Sinopse do episódio..."></textarea></td>
+            `;
+        }
+        
+        function removeRow() {
+            const tbody = document.getElementById('tableBody');
+            if (tbody.rows.length > 0) {
+                tbody.deleteRow(tbody.rows.length - 1);
+            }
+        }
+        
+        function loadExample() {
+            clearTable();
+            const examples = [
+                [1, 2003, '3.98 MB', 'C96p53di', 'Rick Grimes não está preparado para isto...'],
+                [2, 2003, '8.45 MB', 'xwfhQwy1', 'A terrível aventura de Rick Grimes continua...'],
+                [3, 2003, '4.07 MB', 'bpuvdKUy', 'Reunido com sua família, seu foco muda...']
+            ];
+            
+            examples.forEach(data => {
+                const tbody = document.getElementById('tableBody');
+                const row = tbody.insertRow();
+                row.innerHTML = `
+                    <td><input type="number" value="${data[0]}"></td>
+                    <td><input type="number" value="${data[1]}"></td>
+                    <td><input type="text" value="${data[2]}"></td>
+                    <td><input type="text" value="${data[3]}"></td>
+                    <td><textarea rows="1">${data[4]}</textarea></td>
+                `;
+            });
+        }
+        
+        function clearTable() {
+            document.getElementById('tableBody').innerHTML = '';
+        }
+        
+        function generateSQL() {
+            const template = document.getElementById('template').value;
+            
+            const baseSeries = document.getElementById('baseSeries').value;
+            const startYear = document.getElementById('startYear').value;
+            const genres = document.getElementById('genres').value;
+            const comicId = document.getElementById('comicId').value;
+            const idiomId = document.getElementById('idiomId').value;
+            const baseLink = document.getElementById('baseLink').value;
+            const baseCover = document.getElementById('baseCover').value;
+            const coverPattern = document.getElementById('coverPattern').value;
+            
+            if (!template.trim()) {
+                alert('Por favor, adicione um template na seção 1.');
+                return;
+            }
+            
+            const tbody = document.getElementById('tableBody');
+            
+            if (tbody.rows.length === 0) {
+                alert('Por favor, adicione pelo menos uma linha de dados.');
+                return;
+            }
+            
+            const insertMatch = template.match(/INSERT\s+INTO\s+.*?\s*\([^)]+\)/i);
+            const valuesMatch = template.match(/VALUES\s*\(.*?\)/i);
+            
+            if (!insertMatch || !valuesMatch) {
+                alert('Template deve conter INSERT INTO (...) VALUES (...)');
+                return;
+            }
+            
+            const insertPart = insertMatch[0];
+            const valuesTemplate = valuesMatch[0].replace(/VALUES\s*\(/i, '').replace(/\)$/, '');
+            
+            let sql = insertPart + '\nVALUES\n';
+            
+            for (let i = 0; i < tbody.rows.length; i++) {
+                const row = tbody.rows[i];
+                const cells = row.cells;
+                
+                const number = cells[0].querySelector('input').value;
+                const year = cells[1].querySelector('input').value;
+                const size = cells[2].querySelector('input').value;
+                const linkCode = cells[3].querySelector('input').value;
+                const synopsis = cells[4].querySelector('textarea').value;
+                
+                const title = baseSeries ? `${baseSeries} #${number}` : `Issue #${number}`;
+                const series = baseSeries && startYear ? `${baseSeries} (${startYear})` : baseSeries || 'Unknown Series';
+                const link = baseLink + linkCode;
+                
+                let cover = baseCover;
+                if (coverPattern.includes('{number:3}')) {
+                    cover += coverPattern.replace('{number:3}', number.padStart(3, '0'));
+                } else if (coverPattern.includes('{number:2}')) {        // ← NOVA LINHA
+                    cover += coverPattern.replace('{number:2}', number.padStart(2, '0')); // ← NOVA LINHA
+                } else if (coverPattern.includes('{number}')) {
+                    cover += coverPattern.replace('{number}', number);
+                } else {
+                    cover += coverPattern;
+                }
+                
+                let valuesLine = valuesTemplate
+                    .replace(/{title}/g, title)
+                    .replace(/{number}/g, number)
+                    .replace(/{year}/g, year)
+                    .replace(/{size}/g, size)
+                    .replace(/{series}/g, series)
+                    .replace(/{genres}/g, genres)
+                    .replace(/{link}/g, link)
+                    .replace(/{cover}/g, cover)
+                    .replace(/{synopsis}/g, synopsis.replace(/'/g, "''"))
+                    .replace(/{comicId}/g, comicId)
+                    .replace(/{idiomId}/g, idiomId);
+                
+                const isLast = i === tbody.rows.length - 1;
+                sql += `(${valuesLine})${isLast ? ';' : ','}\n`;
+            }
+            
+            document.getElementById('output').textContent = sql;
+        }
+        
+        function copyOutput() {
+            const output = document.getElementById('output');
+            if (!output.textContent.trim()) {
+                alert('Primeiro gere o SQL clicando em "Gerar SQL".');
+                return;
+            }
+            
+            navigator.clipboard.writeText(output.textContent).then(() => {
+                alert('Copiado para a área de transferência!');
+            }).catch(() => {
+                alert('Erro ao copiar. Tente selecionar o texto manualmente.');
+            });
+        }
+        
+        function downloadSQL() {
+            const content = document.getElementById('output').textContent;
+            if (!content.trim()) {
+                alert('Primeiro gere o SQL clicando em "Gerar SQL".');
+                return;
+            }
+            
+            const blob = new Blob([content], { type: 'text/sql' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'seed_data.sql';
+            a.click();
+            URL.revokeObjectURL(url);
+        }
+        
+        setTimeout(() => {
+            for (let i = 0; i < 3; i++) {
+                addRow();
+            }
+        }, 100);
+    </script>
+</body>
+</html>
