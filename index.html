@@ -292,21 +292,6 @@ VALUES ('{title}', {number}, {year}, '{size}', '{series}', ARRAY{genres}, '{link
                     <p><strong>Série:</strong> {baseSeries} ({startYear})</p>
                     <p><strong>Cover:</strong> Auto-gerado baseado no número</p>
                 </div>
-                
-                <div style="margin-top: 15px;">
-                    <h3 style="color: #e48fde; margin-bottom: 10px;">Variáveis Disponíveis:</h3>
-                    <div class="variable" onclick="insertVariable('title')">{title}</div>
-                    <div class="variable" onclick="insertVariable('number')">{number}</div>
-                    <div class="variable" onclick="insertVariable('year')">{year}</div>
-                    <div class="variable" onclick="insertVariable('size')">{size}</div>
-                    <div class="variable" onclick="insertVariable('series')">{series}</div>
-                    <div class="variable" onclick="insertVariable('genres')">{genres}</div>
-                    <div class="variable" onclick="insertVariable('link')">{link}</div>
-                    <div class="variable" onclick="insertVariable('cover')">{cover}</div>
-                    <div class="variable" onclick="insertVariable('synopsis')">{synopsis}</div>
-                    <div class="variable" onclick="insertVariable('comicId')">{comicId}</div>
-                    <div class="variable" onclick="insertVariable('idiomId')">{idiomId}</div>
-                </div>
             </div>
         </div>
 
@@ -323,11 +308,11 @@ VALUES ('{title}', {number}, {year}, '{size}', '{series}', ARRAY{genres}, '{link
                 </div>
                 <div class="form-group">
                     <label>Comic ID:</label>
-                    <input type="number" id="comicId" value="5" placeholder="ID do comic">
+                    <input type="number" id="comicId" placeholder="ID do comic">
                 </div>
                 <div class="form-group">
                     <label>Idiom ID:</label>
-                    <input type="number" id="idiomId" value="1" placeholder="1 = Português Brasileiro, 2 = Inglês">
+                    <input type="number" id="idiomId" placeholder="1 = Português Brasileiro, 2 = Inglês">
                 </div>
                 <div class="form-group">
                     <label>Gêneros (formato array):</label>
@@ -339,11 +324,11 @@ VALUES ('{title}', {number}, {year}, '{size}', '{series}', ARRAY{genres}, '{link
                 </div>
                 <div class="form-group">
                     <label>Base URL Cover:</label>
-                    <input type="text" id="baseCover" placeholder="https://example.com/covers/">
+                    <input type="text" id="baseCover" placeholder="https://mnsrlwbitookavxxvyhp.supabase.co/storage/v1/object/public/covers/{nome-da-serie}/">
                 </div>
                 <div class="form-group">
                     <label>Padrão Cover:</label>
-                    <input type="text" id="coverPattern" value="the-walking-dead-{number:3}.webp">
+                    <input type="text" id="coverPattern" value="{nome-da-serie}-{number:3}.webp">
                 </div>
             </div>
         </div>
